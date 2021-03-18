@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.vendors')}}">المتاجر </a>
+                                <li class="breadcrumb-item"><a href="{{route(vendors.index')}}">المتاجر </a>
                                 </li>
                                 <li class="breadcrumb-item active">إضافة متجر
                                 </li>
@@ -39,25 +39,27 @@
                                         </ul>
                                     </div>
                                 </div>
-                                @include('admin.includes.alerts.success')
-                                @include('admin.includes.alerts.errors')
+                         
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.vendors.store')}}"
+
+
+                                        <form class="form" action=""
                                               method="POST"
                                               enctype="multipart/form-data">
                                             <input type="hidden"  value="" id="latitude" name="latitude">
                                             <input type="hidden" value="" id="longitude"  name="longitude">
-                                            @csrf
+
+                                      {{csrf_field()}}
+                                    {{method_field('post')}}
+                                    
                                             <div class="form-group">
                                                 <label> لوجو التجار </label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <input type="file" id="file" name="logo">
                                                     <span class="file-custom"></span>
                                                 </label>
-                                                @error('logo')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
+                
                                             </div>
 
                                             <div class="form-body">
@@ -73,9 +75,7 @@
                                                                    class="form-control"
                                                                    placeholder="  "
                                                                    name="name">
-                                                            @error("name")
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
+                                                        
                                                         </div>
                                                     </div>
 
@@ -92,9 +92,7 @@
                                                                     @endif
                                                                 </optgroup>
                                                             </select>
-                                                            @error('category_id')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
+                                                      
                                                         </div>
                                                     </div>
                                                 </div>
@@ -108,9 +106,7 @@
                                                                    class="form-control"
                                                                    placeholder="  " name="mobile">
 
-                                                            @error("mobile")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
+                                                          
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 ">
@@ -120,9 +116,7 @@
                                                                    class="form-control"
                                                                    placeholder="  " name="email">
 
-                                                            @error("email")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
+                                                       
                                                         </div>
                                                     </div>
 
@@ -138,9 +132,7 @@
                                                                        class="form-control"
                                                                        placeholder="  " name="password">
 
-                                                                @error("password")
-                                                                <span class="text-danger"> {{$message}}</span>
-                                                                @enderror
+                                                          
                                                             </div>
 
                                                     </div>
@@ -155,9 +147,6 @@
                                                                    class="form-control"
                                                                    placeholder="  " name="address">
 
-                                                            @error("address")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -173,9 +162,6 @@
                                                             <label for="switcheryColor4"
                                                                    class="card-title ml-1">الحالة </label>
 
-                                                            @error("active")
-                                                            <span class="text-danger"> </span>
-                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>

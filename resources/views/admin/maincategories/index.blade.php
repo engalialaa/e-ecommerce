@@ -59,14 +59,13 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
                                     @if($maincategories->count() > 0 )
-                                        <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
-                                            <thead class="">
+                                        <table class="table  table-bordered table-hover">
+                                            <thead>
                                             <tr>
                                                 <th>القسم </th>
                                                 <th> اللغة</th>
-                                                 <th>الحالة</th>
-                                                 <th>صوره القسم</th>
+                                                <th>الحالة</th>
+                                                <th>صوره القسم</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -75,30 +74,68 @@
                                                     <tr>
                                                         <td>{{$category -> name}}</td>
                                                         <td>{{get_default_lang()}}</td>
-                                                        <td>{{$category -> getActive()}}</td>
+
+                                                       
+                                                                <td
+                                                                @if($category->active == 1)
+                                                                class="btn btn-success btn-sm" 
+                                                                @else
+                                                                class="btn btn-danger btn-sm" 
+                                                                @endif
+                                                                style="margin-top: 10px;margin-right: 10px;">
+
+                                                                 {{$category->getActive()}}
+                                                                </td>
+
+                            
                                                         <td><img src="{{$category-> image_path }}" style="width: 100px;" class="img-thumbnail" alt=""></td>                                                
 
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
+
+                                                                 @if(auth()->user()->haspermission('maincategories_update'))      
+                                                                <a href="{{route('maincategories.edit',$category->id)}}"
+                                                                class="btn  btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-3 btn-sm "><i class="fa fa-edit" ></i>تعديل</a>
+                                                                @else
+                                                                <a href="#"
+                                                                class="btn btn-outline-info btn-min-width box-shadow-3 mr-1 mb-3 btn-sm disabled"><i class="fa fa-edit" ></i>تعديل</a>
+                                                                @endif
+
+                                                                
+                                                                @if(auth()->user()->haspermission('maincategories_delete'))     
+                                                                <form action="{{route('maincategories.destroy',$category->id)}}"  method="post">
+                                                                {{ csrf_field() }}
+                                                                {{ method_field('delete')}}
+                                                                <button type="submit"  class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1 delete btn-sm"><i class="fa fa-trash"></i>@lang('site.delete')</button>
+                                
+                                                                </form>
+                                                                @else
+                                                                <button  class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-3 btn-sm" disabled><i class="fa fa-trash" ></i>@lang('site.delete')</button>
+                                                                @endif
+                                                      
+                                                                @if(auth()->user()->haspermission('maincategories_update'))     
                                                                 <a href=""
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
-
-
-                                                                <a href=""
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-
-
-                                                                <a href=""
-                                                                   class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">
+                                                                   class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-3 btn-sm">
+                                                                   <i class="fa fa-user-slash"></i>
                                                                     @if($category -> active == 0)
                                                                         تفعيل
                                                                         @else
                                                                         الغاء تفعيل
-                                                                    @endif
+                                                                         @endif
                                                                 </a>
-
-
+                                                                @else
+                                                                       
+                                                                <a href=""
+                                                                   class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-3 btn-sm disabled">
+                                                                   <i class="fa fa-user-slash"></i>
+                                                                    @if($category -> active == 0)
+                                                                        تفعيل
+                                                                        @else
+                                                                        الغاء تفعيل
+                                                                         @endif
+                                                                </a>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -107,8 +144,7 @@
 
                                             </tbody>
                                         </table>
-                               
-                                   
+                        
                                    @else
                                   <h2>@lang('site.no_deta_found')</h2>
                                   @endif

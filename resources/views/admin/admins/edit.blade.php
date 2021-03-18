@@ -100,20 +100,20 @@
 
 
                                                 <div class="form-group">
-                                      <label>@lang('site.permissions')</label>
+                                      <label style="margin-bottom: 15px;">@lang('site.permissions')</label>
 
                                     @php
 
-                                        $models = ['admins','categories','languages',];
+                                        $models = ['admins','maincategories','vendors','languages'];
                                         $crud   = ['create','read','update','delete']
 
                                     @endphp
 
                                       <div class="card">
                             <div class="card d-flex p-0">
-                              <ul class="nav nav-pills ml-auto p-2 active" style=" margin-left: 70%;">
+                              <ul class="nav nav-tabs active" style=" margin-left: 71%;">
                               @foreach($models as $index => $model)
-                              <li class="nav-item"><a class="nav-link {{$index == 0 ? 'active' : '' }}" href="#{{$model}}" data-toggle="tab">{{$model}}</a></li>
+                              <li class="nav-item"><a class="nav-link {{$index == 0 ? 'active' : '' }}" href="#{{$model}}" data-toggle="tab">@lang('site.' .$model)</a></li>
                               @endforeach
                               </ul>
                             
@@ -127,7 +127,7 @@
                                 <div class="tab-pane {{$index == 0 ? 'active' : '' }}" id="{{$model}}">
 
                                 @foreach($crud as $prem)
-                                <input name="permissions[]" type="checkbox" {{$admin->haspermission($model. '_' .$prem ) ? 'checked' : ''}}  value="{{$model. '_' .$prem  }}"> <label> @lang('site.' .$prem) </label>
+                                <input name="permissions[]" type="checkbox" {{$admin->haspermission($model. '_' .$prem ) ? 'checked' : ''}}  value="{{$model. '_' .$prem  }}"> <label style="margin-left: 10px;"> @lang('site.' .$prem) </label>
 
                                 @endforeach                           
                                 </div>
@@ -140,17 +140,15 @@
 
 
                                       </div>
-
-
-                                            <div class="form-actions">
+                                      <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                    <i class="fas fa-minus-square"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="fas fa-edit"></i> تعديل
                                                 </button>
-                                            </div>
+                        
                                         </form>
                                     </div>
                                 </div>

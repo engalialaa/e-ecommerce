@@ -44,13 +44,14 @@
                              
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+
                                     @include('partials._errors')
+
                                         <form class="form" action="{{route('maincategories.store')}}"  method="POST" enctype="multipart/form-data">
                                         {{csrf_field()}}
                                     {{method_field('post')}}
 
                                         <div class="form-body">
-
                                                 <div class="form-group">
                                                       <label>الصوره</label>
                                                       <input class="form-control image" name="image" type="file" required>
@@ -68,20 +69,20 @@
 
                                                         <div class="form-group">
                                                             <label for="projectinput1">اسم القسم @lang('site.'.$lang->abbr)</label>
-                                                             <input type="text" value="" id="name" class="form-control" placeholder="" name="category[{{$index}}][name]">    
+                                                             <input type="text" required id="name" class="form-control" placeholder="@lang('site.'.$lang->direction)" name="category[{{$index}}][name]">    
                                                                 </div>
                                                      
 
-                                                        <div class="form-group">
+                                                        <div class="form-group hidden">
                                                             <label for="projectinput1"> أختصار اللغة @lang('site.'.$lang->abbr)</label>
-                                                             <input type="text" id="abbr" class="form-control"  placeholder="" value="" name="category[{{$index}}][abbr]">
+                                                             <input type="text" id="abbr" class="form-control"   value="{{$lang->abbr}}" name="category[{{$index}}][abbr]">
                                                              </div>
 
                                                         <div class="form-group mt-1">
                                                             <input type="checkbox"  value="1" name="category[{{$index}}][active]"
                                                                    id="switcheryColor4"
                                                                    class="switchery" data-color="success"
-                                                                   checked/>
+                                                                   checked >
                                                             <label for="switcheryColor4"
                                                                    class="card-title ml-1">الحالة @lang('site.'.$lang->abbr) </label>
                                                         </div>
@@ -94,16 +95,16 @@
 
                                         </div><!-- end of form body -->
 
-
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                    <i class="fas fa-minus-square"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="fas fa-plus-square"></i> حفظ
                                                 </button>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>

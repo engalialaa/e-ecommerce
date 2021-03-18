@@ -113,16 +113,16 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                    <i class="fas fa-minus-square"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="fas fa-plus-square"></i> حفظ
                                                 </button>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>

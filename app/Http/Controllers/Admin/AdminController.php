@@ -19,7 +19,8 @@ class AdminController extends Controller
             $this->middleware(['permission:admins_create'])->only('create');
             $this->middleware(['permission:admins_update'])->only('edit');
             $this->middleware(['permission:admins_delete'])->only('destroy');
-    }
+
+    }//end of construct
 
     public function index(Request $request)
     {
@@ -30,7 +31,6 @@ class AdminController extends Controller
                return $q->where('name','like','%' .$request->search .'%') 
 
                ->orwhere('email','like','%' .$request->search .'%');
-
            });
 
        })->latest()->paginate(5);
@@ -88,7 +88,7 @@ class AdminController extends Controller
 
     public function edit(Admin $admin)
     {
-
+      
         return view('admin.admins.edit',compact('admin'));
     }
 
@@ -102,15 +102,13 @@ class AdminController extends Controller
             'email'         => ['required', Rule::unique('admins')->ignore($admin->id),],
             'image'         =>'image',
             'permissions'   => 'required|min:1'
-
-            
-
         ]);
+        
 
 
         $request_data = $request->except(['permissions', 'image']);
 
-        if ($request->image) {
+        if ($request->image) { 
 
             if ($admin->image != 'default.png') {
 
@@ -125,8 +123,9 @@ class AdminController extends Controller
                 ->save(public_path('uploads/admins_images/' . $request->image->hashName()));
 
             $request_data['image'] = $request->image->hashName();
-
+           
         }//end of external if
+   
 
         $admin->update($request_data);
        

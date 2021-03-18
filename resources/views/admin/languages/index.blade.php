@@ -87,10 +87,10 @@
                                                                  aria-label="Basic example">
                                                          @if(auth()->user()->haspermission('languages_update'))   
                                                          <a href="{{route('languages.edit',$language->id)}}"
-                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1 btn-sm">تعديل</a>
+                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1 btn-sm"><i class="fa fa-edit" ></i> تعديل</a>
                                                         @else
                                                          <a href="#"
-                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1 btn-sm disabled">تعديل</a>
+                                                         class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1 btn-sm disabled"> <i class="fa fa-edit" ></i> تعديل</a>
                                                         @endif
                                                         
                                                         @if(auth()->user()->haspermission('languages_delete'))   

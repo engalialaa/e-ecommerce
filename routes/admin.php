@@ -28,6 +28,12 @@ use Illuminate\Support\Facades\Route;
             
             //MainCategories route
             Route::resource('maincategories','MainCategoriesController')->except(['show']);
+
+               
+            //vendors route
+            Route::resource('vendors','VendorController')->except(['show']);
+        
+
         
 
         });//end of admin routs

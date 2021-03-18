@@ -16,8 +16,9 @@ return [
         'super_admin' => [
             
             'maincategories' => 'c,r,u,d',
-            'languages' => 'c,r,u,d',
-            'admins'    => 'c,r,u,d',
+            'vendors'        => 'c,r,u,d',
+            'languages'      => 'c,r,u,d',
+            'admins'         => 'c,r,u,d',
         ],
 
         'admin' =>[]

@@ -14,10 +14,11 @@ class LanguagesController extends Controller
             $this->middleware(['permission:languages_create'])->only('create');
             $this->middleware(['permission:languages_update'])->only('edit');
             $this->middleware(['permission:languages_delete'])->only('destroy');
-    }
+    }//end of construct 
 
    
     public function index(Request $request)
+
     {
 
         $languages = Language::when($request->search,function($q) use ($request){
@@ -27,13 +28,13 @@ class LanguagesController extends Controller
 
         })->latest()->paginate(5);
         return view('admin.languages.index',compact('languages'));
-    }
+    }//end of index 
 
-   
     public function create()
     {
         return view('admin.languages.create');
-    }
+
+    }//end of create 
 
     
     public function store(Request $request)
@@ -53,12 +54,13 @@ class LanguagesController extends Controller
             session()->flash('success', __('site.added_successfully'));
             return redirect()->route('languages.index');
 
-    }
+    }//end of store 
 
     public function edit(Language $language)
     {
         return view('admin.languages.edit',compact('language'));
-    }
+
+    }//end of edit 
 
  
     public function update(Request $request, Language $language)
@@ -71,16 +73,17 @@ class LanguagesController extends Controller
             'direction' => 'required|in:rtl,ltr',
 
 
-        ]);
+        ]);//end of validate
 
         if (!$request->has('active'))
         $request->request->add(['active' => 0]);
 
-    
+
         $language->update($request->all());
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('languages.index');
-    }
+        
+    }//end of update 
     
 
 
@@ -90,5 +93,6 @@ class LanguagesController extends Controller
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('languages.index');
 
-    }
-}
+    }//end of destroy 
+
+}//end of LanguagesController 

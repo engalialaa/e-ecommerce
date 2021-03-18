@@ -11,11 +11,33 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> ألمتاجر
+                                <li class="breadcrumb-item active"> المتاجر
                                 </li>
                             </ol>
                         </div>
                     </div>
+
+                    <br>
+
+                    <form action="" method="get" >
+                <div class="row">
+                <div class="col-md-8">
+                    <input class="form-control" name="search" type="text" placeholder="@lang('site.Search')" aria-label="Search" value="{{request()->search}}">
+                    </div>
+                    <div class="col-md-4">
+                    <button class="btn btn-primary" type="submit">@lang('site.Search')<i class="fas fa-search"></i></button>
+                    
+                    @if(auth()->user()->haspermission('vendors_create'))     
+                    <a href="{{route('vendors.create')}}" class='btn btn-primary'>@lang('site.add')<i class="fas fa-plus"></i></a>
+                    @else
+                    <a href="#" class='btn btn-info'>@lang('site.add')<i class="fas fa-plus disabled"></i></a>
+                    @endif
+                    </div>
+                </div>
+                </form>
+
+
+
                 </div>
             </div>
             <div class="content-body">
@@ -25,7 +47,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع المتاجر </h4>
+                                    <h3> المتاجر </h3>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -38,13 +60,11 @@
                                     </div>
                                 </div>
 
-                                @include('admin.includes.alerts.success')
-                                @include('admin.includes.alerts.errors')
-
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
+                                    @if($vendors->count() > 0 )
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            class="table display nowrap table-striped table-bordered ">
                                             <thead class="">
                                             <tr>
                                                 <th>الاسم</th>
@@ -65,7 +85,7 @@
                                                                  src="{{$vendor -> 	logo}}"></td>
 
                                                         <td>{{$vendor -> mobile}}</td>
-                                                        <td> {{$vendor -> 	category -> name}}</td>
+                                                        <td> {{$vendor -> category -> name}}</td>
 
                                                         <td> {{$vendor -> getActive()}}</td>
                                                         <td>
@@ -92,6 +112,13 @@
 
                                             </tbody>
                                         </table>
+
+                                     {{$vendors->appends(request()->query())->links()}}
+                                        
+                                     @else
+                                    <h2>@lang('site.no_deta_found')</h2>
+                                    @endif
+
                                         <div class="justify-content-center d-flex">
 
                                         </div>

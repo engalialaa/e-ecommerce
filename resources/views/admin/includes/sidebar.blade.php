@@ -22,10 +22,22 @@
              <li class="nav-item">
                     <a href="{{route('maincategories.index')}}"><i class="la la-home"></i>
                         <span class="menu-title" data-i18n="nav.dash.main"> الاقسام الرئيسية </span>
-                        <span class="badge badge badge-info badge-pill float-right mr-2">{{App\ModelsAdmin\MainCategories::count()}}</span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{App\ModelsAdmin\MainCategory::count()}}</span>
                     </a>
              </li><!--end of li nav-item   --> 
              @endif
+
+
+             @if(auth()->user()->haspermission('vendors_read'))
+              <!-- المتاجر   -->
+             <li class="nav-item">
+                    <a href="{{route('vendors.index')}}"><i class="la la-home"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> المتاجر </span>
+                        <span class="badge badge badge-info badge-pill float-right mr-2">{{App\ModelsAdmin\Vendor::count()}}</span>
+                    </a>
+             </li><!--end of li nav-item   --> 
+             @endif
+
 
              @if(auth()->user()->haspermission('languages_read'))
               <!-- لغات الموقع -->
@@ -46,7 +58,7 @@
               <li class="nav-item">
           <a href="{{route('admins.index')}}"><i class="la la-home"></i>
               <span class="menu-title" data-i18n="nav.dash.main">المشرفين</span>
-              <span class="badge badge badge-info badge-pill float-right mr-2">{{App\ModelsAdmin\Admin::count()}}</span>
+              <span class="badge badge badge-info badge-pill float-right mr-2">{{App\ModelsAdmin\Admin::whereRoleIs('admin')->count()}}</span>
           </a>
           </li><!--end of li nav-item   --> 
           @endif

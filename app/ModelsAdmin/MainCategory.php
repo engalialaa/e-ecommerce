@@ -4,7 +4,7 @@ namespace App\ModelsAdmin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategories extends Model
+class MainCategory extends Model
 {
   
     protected $guarded = [];
@@ -23,7 +23,7 @@ class MainCategories extends Model
     
     public function  scopeSelection($query){
 
-        return $query ->select('id','translation_lang', 'name', 'image', 'active');
+        return $query->select('id','translation_lang', 'name', 'image', 'active');
     }
 
     public function getActive(){
@@ -33,11 +33,19 @@ class MainCategories extends Model
       public function getImagePathAttribute()
       {
           return asset('uploads/category_images/' . $this->image);
-  
+          
       }//end of get image path
 
 
-}//end of MainCategories
+           // get all translation categories
+    public function categories()
+    {
+        return $this->hasMany(self::class, 'translation_of');
+    }
+
+
+
+}//end of MainCategory
 
 
 
