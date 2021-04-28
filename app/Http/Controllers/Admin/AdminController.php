@@ -28,7 +28,9 @@ class AdminController extends Controller
         
             return $query->when($request->search, function ($q) use ($request) {
 
-               return $q->where('name','like','%' .$request->search .'%') 
+               return $q->where('first_name','like','%' .$request->search .'%') 
+
+               ->orwhere('last_name','like','%' .$request->search .'%')
 
                ->orwhere('email','like','%' .$request->search .'%');
            });
@@ -36,18 +38,20 @@ class AdminController extends Controller
        })->latest()->paginate(5);
 
         return view('admin.admins.index',compact('admins'));
-    }
+
+    }//end of index
 
   
     public function create()
     {
         return view('admin.admins.create');
-    }
+
+    }//end of create
 
  
     public function store(Request $request)
     {
-       //dd($request->all());
+      
         $request->validate([
 
             'first_name'     =>'required',
@@ -57,7 +61,7 @@ class AdminController extends Controller
             'password'      =>'required|confirmed',
             'permissions'   => 'required|min:1',
 
-        ]);
+        ]);//end of validate
 
         $request_data =$request ->except(['password','password_confirmation','Permissions[]','image']);
         $request_data['password'] = bcrypt($request->password);
@@ -90,7 +94,9 @@ class AdminController extends Controller
     {
       
         return view('admin.admins.edit',compact('admin'));
-    }
+
+    }//end of edit
+
 
  
     public function update(Request $request, Admin $admin)
@@ -102,7 +108,8 @@ class AdminController extends Controller
             'email'         => ['required', Rule::unique('admins')->ignore($admin->id),],
             'image'         =>'image',
             'permissions'   => 'required|min:1'
-        ]);
+
+        ]);//end of validate
         
 
 
@@ -133,6 +140,7 @@ class AdminController extends Controller
         
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admins.index');
+
     }//end of update
 
 
@@ -150,5 +158,5 @@ class AdminController extends Controller
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('admins.index');
 
-    }
+    }//end of destroy
 }

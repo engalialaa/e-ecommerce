@@ -56,25 +56,24 @@
                                     <div class="form-body">
                                      <h4 class="form-section"><i class="ft-home"></i> بيانات  المشرفين </h4>
                                       <div class="row">
-
                                          <div class="col-md-12">
+
                                           <div class="form-group">
                                             <label for="projectinput1">الاسم الاول</label>
                                                <input type="text" value="{{old('first_name')}}" id="first_name" class="form-control" placeholder="الاسم الاول" name="first_name" required>                                               
-                                                </div>
-                                                </div>
+                                            </div>
+                                                
 
                                                 
-                                         <div class="col-md-12">
+                                       
                                           <div class="form-group">
                                             <label for="projectinput1">الاسم الاخير</label>
                                                <input type="text" value="{{old('last_name')}}" id="last_name" class="form-control" placeholder="الاسم الاخير" name="last_name" required>                                               
-                                                </div>
-                                                </div>
+                                             </div>
+                                            
 
-                                                    <div class="col-md-12">
+                                                    
                                                         <div class="form-group">
-    
                                                             <label for="projectinput1">البريد الاكترونى</label>
                                                             <input type="email" value="{{old('email')}}" id="email"
                                                                    class="form-control"
@@ -82,50 +81,41 @@
                                                                    name="email" required>
                                                            
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                                            
+                                                              
                                                   <div class="form-group">
                                                       <label>@lang('site.image')</label>
-                                                      <input class="form-control image" name="image" type="file" required>
+                                                      <input class="form-control image"  value="{{old('image')}}"  name="image" type="file" required>
                                                   </div>
 
                                                                             
                                                   <div class="form-group">
-                                                    <img src="{{ asset('uploads/admins_images/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
+                                                    <img src="{{ asset('uploads/admins_images/default.png') }}"  value="{{old('image')}}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
                                                 </div>
 
 
 
-                                                <div class="row">
-                                                    <div class="col-md-12">
+                                               
                                                     <div class="form-group">
-            
                                                     <label for="projectinput1">كلمه المرور</label>
                                                     <input type="password" value="{{old('password')}}" id="password"
                                                           class="form-control"
                                                           placeholder="ادخل  كلمه المرور  "
                                                           name="password" required>
-                                                  
                                                     </div>
-                                                    </div>
-                                                </div>
 
+                    
                                                 
-                                                <div class="row">
-                                                    <div class="col-md-12">
                                                     <div class="form-group">
-          
                                                     <label for="projectinput1"> تاكيد كلمه المرور </label>
                                                     <input type="password" value="{{old('password_confirmation')}}" id="password"
                                                           class="form-control"
                                                           placeholder="ادخل تاكيد كلمه المرور "
                                                           name="password_confirmation" required>
-                                                  
-                                                </div>
                                                     </div>
-                                                </div>
+
+                                                
+                                                 </div> <!--  end of col-md-12  -->
+                                                </div> <!--  end of row  -->
 
 
                                                 <div class="form-group">

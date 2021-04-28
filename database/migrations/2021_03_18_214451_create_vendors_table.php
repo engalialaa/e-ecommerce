@@ -14,8 +14,18 @@ class CreateVendorsTable extends Migration
     public function up()
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->id();
+            $table->Increments('id');
+            $table->char('name', 150);
+            $table->char('phone',50);	
+            $table->text('address');
+            $table->char('email',100)->nullable();
+            $table->string('password');
+            $table->text('logo')->default('default.png');	
+            $table->char('category_id',10);	
+            $table->tinyInteger('active')->default('0'); 
+            $table->timestamp('email_verified_at')->nullable();	
             $table->timestamps();
+      
         });
     }
 

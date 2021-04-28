@@ -41,7 +41,16 @@ class MainCategory extends Model
     public function categories()
     {
         return $this->hasMany(self::class, 'translation_of');
-    }
+
+    }//end of categories
+
+
+    
+    public function vendors(){
+
+        return $this -> hasMany('App\ModelsAdmin\Vendor','category_id','id');
+
+    }//end of hasMany vendors
 
 
 

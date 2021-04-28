@@ -72,7 +72,7 @@
                                                 <th>الهاتف</th>
                                                 <th>القسم الرئيسي</th>
                                                 <th> ألحالة </th>
-                                                <th>الإجراءات</th>
+                                                <th>أكشن</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -81,26 +81,57 @@
                                                 @foreach($vendors as $vendor)
                                                     <tr>
                                                         <td>{{$vendor -> name}}</td>
-                                                        <td><img style="width: 150px; height: 100px;"
-                                                                 src="{{$vendor -> 	logo}}"></td>
 
-                                                        <td>{{$vendor -> mobile}}</td>
+                                                        <td><img src="{{$vendor-> logo_path }}" style="width: 100px;" class="img-thumbnail" alt="لوجو المتجر"></td>                                                
+
+                                                        <td>{{ is_array($vendor->phone) ? implode($vendor->phone, '-') : $vendor->phone }}</td>
+
                                                         <td> {{$vendor -> category -> name}}</td>
 
-                                                        <td> {{$vendor -> getActive()}}</td>
+                                                        
+                                                        <td
+                                                                @if($vendor->active == 1)
+                                                                class="btn btn-success btn-sm" 
+                                                                @else
+                                                                class="btn btn-danger btn-sm" 
+                                                                @endif
+                                                                style="margin-top: 10px;margin-right: 10px;">
+
+                                                                 {{$vendor->getActive()}}
+
+                                                        </td>
+
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
+
+                                                                 @if(auth()->user()->haspermission('vendors_update')) 
                                                                 <a href="{{route('admin.vendors.edit',$vendor -> id)}}"
                                                                    class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                @else
+                                                                <a href="#"
+                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1 disabled">تعديل</a>
+                                                                @endif
 
+                                                                
+                                                                @if(auth()->user()->haspermission('vendors_delete'))     
+                                                                <form action="{{route('vendors.destroy',$vendor->id)}}"  method="post">
+                                                                {{ csrf_field() }}
+                                                                {{ method_field('delete')}}
+                                                                <button type="submit"  class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1 delete btn-sm"><i class="fa fa-trash" ></i>@lang('site.delete')</button>
+                                
+                                                                </form>
+                                                                @else
+                                                                <button  class="btn btn-outline-danger btn-min-width   mb-1 btn-sm" disabled><i class="fa fa-trash" ></i>@lang('site.delete')</button>
+                                                                @endif
 
-                                                                <a href=""
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-
-
+                                                                @if(auth()->user()->haspermission('vendors_update')) 
                                                                 <a href=""
                                                                    class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">تفعيل</a>
+                                                                @else
+                                                                <a href=""
+                                                                   class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1 disabled">تفعيل</a>
+                                                                @endif
 
 
                                                             </div>

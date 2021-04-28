@@ -70,7 +70,7 @@
                                                 <th>الاسم الاخير</th>
                                                 <th>البريد الاكترونى</th>
                                                 <th>الصوره</th>
-                                                <th>الإجراءات</th>
+                                                <th>أكشن</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -100,7 +100,7 @@
                         
                                                         </form>
                                                         @else
-                                                        <button  class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1 btn-sm" disabled><i class="fa fa-trash" ></i>@lang('site.delete')</button>
+                                                        <button  class="btn btn-outline-danger btn-min-width   mb-1 btn-sm" disabled><i class="fa fa-trash" ></i>@lang('site.delete')</button>
                                                         @endif
                                                       
 

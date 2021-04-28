@@ -9,9 +9,9 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route(vendors.index')}}">المتاجر </a>
+                                <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">المتاجر </a>
                                 </li>
                                 <li class="breadcrumb-item active">إضافة متجر
                                 </li>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة متجر </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة تاجر </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -42,48 +42,39 @@
                          
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+                                    @include('partials._errors')
 
-
-                                        <form class="form" action=""
+                                        <form class="form" action="{{route('vendors.store')}}"
                                               method="POST"
                                               enctype="multipart/form-data">
                                             <input type="hidden"  value="" id="latitude" name="latitude">
                                             <input type="hidden" value="" id="longitude"  name="longitude">
 
-                                      {{csrf_field()}}
+                                            {{csrf_field()}}
                                     {{method_field('post')}}
+                                   
+                                    <div class="form-body">
                                     
-                                            <div class="form-group">
-                                                <label> لوجو التجار </label>
-                                                <label id="projectinput7" class="file center-block">
-                                                    <input type="file" id="file" name="logo">
-                                                    <span class="file-custom"></span>
-                                                </label>
-                
-                                            </div>
+                                                 <div class="form-group">
+                                                      <label>اللوجو</label>
+                                                      <input class="form-control  image"  value="{{old('logo')}}"  name="logo" type="file">
+                                                  </div>
+                                                                             
+                                                  <div class="form-group">
+                                                    <img src="{{ asset('uploads/vendors_logo/default.png') }}"  value="{{old('logo')}}"  style="width: 100px" class="img-thumbnail image-preview" alt="لوجو المتجر">
+                                                </div>
 
-                                            <div class="form-body">
-
+                            
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات المتجر </h4>
-
-
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الاسم </label>
-                                                            <input type="text" value="" id="name"
-                                                                   class="form-control"
-                                                                   placeholder="  "
-                                                                   name="name">
-                                                        
-                                                        </div>
-                                                    </div>
+                                                    <div class="col-md-12">
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
+
+                                                    <div class="form-group">
                                                             <label for="projectinput2"> أختر القسم </label>
                                                             <select name="category_id" class="select2 form-control">
-                                                                <optgroup label="من فضلك أختر القسم ">
+                                                                <optgroup>
+                                                                <option value="">من فضلك أختر القسم</option>
                                                                     @if($categories && $categories -> count() > 0)
                                                                         @foreach($categories as $category)
                                                                             <option
@@ -92,68 +83,74 @@
                                                                     @endif
                                                                 </optgroup>
                                                             </select>
-                                                      
                                                         </div>
-                                                    </div>
-                                                </div>
+                                            
 
-
-                                                <div class="row">
-                                                    <div class="col-md-6 ">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> رقم الهاتف </label>
-                                                            <input type="text" id="mobile"
+                                                            <label for="projectinput1"> الاسم الاول </label>
+                                                            <input type="text" value="" id="name"
                                                                    class="form-control"
-                                                                   placeholder="  " name="mobile">
-
-                                                          
+                                                                   placeholder="ادخل الاسم الاول"
+                                                                   name="first_name">
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6 ">
+
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> ألبريد الالكتروني </label>
+                                                            <label for="projectinput1"> الاسم الاخير </label>
+                                                            <input type="text" value="" id="name"
+                                                                   class="form-control"
+                                                                   placeholder="اخل الاسم الاخير"
+                                                                   name="last_name">
+                                                        </div>
+
+
+                                                        @for ($i = 0; $i < 2; $i++)
+                                                            <div class="form-group">
+                                                                <label>@lang('site.phone')</label>
+                                                                <input type="text"  placeholder="01011111111" name="phone[]" class="form-control">
+                                                            </div>
+                                                     @endfor
+
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> البريد الالكتروني </label>
                                                             <input type="text" id="email"
                                                                    class="form-control"
-                                                                   placeholder="  " name="email">
-
-                                                       
+                                                                   placeholder="ادخل البريد الالكتروني" name="email">
                                                         </div>
-                                                    </div>
 
-
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="class col-12">
                                                             <div class="form-group">
                                                                 <label for="projectinput1">كلمة المرور  </label>
                                                                 <input type="password" id="password"
                                                                        class="form-control"
-                                                                       placeholder="  " name="password">
-
-                                                          
+                                                                       placeholder=" ادخل  كلمه المرور " name="password">
                                                             </div>
 
+
+                                                    <div class="form-group">
+                                                    <label for="projectinput1"> تاكيد كلمه المرور </label>
+                                                    <input type="password" value="{{old('password_confirmation')}}" id="password"
+                                                          class="form-control"
+                                                          placeholder="ادخل تاكيد كلمه المرور "
+                                                          name="password_confirmation">
                                                     </div>
-                                                </div>
 
-
-                                                <di class="row">
-                                                    <div class="col-md-6 ">
+                                        
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> العنوان  </label>
+                                                            <label for="projectinput1"> العنوان</label>
                                                             <input type="text" id="pac-input"
                                                                    class="form-control"
-                                                                   placeholder="  " name="address">
-
+                                                                   placeholder="ابحث عن العنوان" name="address">
                                                         </div>
-                                                    </div>
+                                        
+                                                    </div> <!--  end of col-md-12  -->
+                                                </div> <!--  end of row  -->
+                                          
 
-                                                </di>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
+
+                                            <div id="map" style="height:500px;width:50%;"></div>
+
+                                            <br>
+
+                                            <div class="form-group mt-1">
                                                             <input type="checkbox" value="1"
                                                                    name="active"
                                                                    id="switcheryColor4"
@@ -161,25 +158,21 @@
                                                                    checked/>
                                                             <label for="switcheryColor4"
                                                                    class="card-title ml-1">الحالة </label>
-
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
 
 
-                                            <div id="map" style="height: 500px;width: 1000px;"></div>
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
-                                                    <i class="ft-x"></i> تراجع
+                                                    <i class="fas fa-minus-square"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="fas fa-plus-square"></i> حفظ
                                                 </button>
                                             </div>
+                                    </div> <!--  end of form body  -->
+
                                         </form>
                                     </div>
                                 </div>
@@ -215,6 +208,7 @@
 
         // This example requires the Places library. Include the libraries=places
         // parameter when you first load the API. For example:
+        
         // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
         function initAutocomplete() {
@@ -323,7 +317,7 @@
 
             // Create the search box and link it to the UI element.
             var input = document.getElementById('pac-input');
-            $("#pac-input").val("أبحث هنا ");
+            $("#pac-input").val("");
             var searchBox = new google.maps.places.SearchBox(input);
             map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 

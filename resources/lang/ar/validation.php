@@ -184,13 +184,15 @@ return [
         'purchase_price'        =>  'سعر الشراء',
         'sale_price'            =>  '  سعر البيع',
         'stock'                 =>  'المخزون',
-        'category_id'           => 'الاقسام',
+        'category_id'           => 'القسم',
         'titel_ar'              =>  'العنوان باللغه العربيه',
         'titel_en'              =>  '  العنوان باللغه العربيه',
         'phone.0'               =>'التليفون',
         'products'              =>'المنتجات',
         'category.*.name'       =>'اسم القسم',
         'category.*.active'     =>'الحاله',
+        'logo'                   =>'اللوجو',
+
 
         ],
 
